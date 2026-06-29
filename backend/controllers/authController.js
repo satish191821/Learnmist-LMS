@@ -68,7 +68,7 @@ export const verifyEmail = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(200).json(user);
@@ -125,7 +125,7 @@ export const login = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(200).json(user);
@@ -172,7 +172,7 @@ export const googleSignup = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "Lax",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
     return res.status(200).json(user);
