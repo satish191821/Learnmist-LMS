@@ -39,14 +39,6 @@ app.use("/api/payment", paymentRouter)
 app.use("/api/ai", aiRouter)
 app.use("/api/review", reviewRouter)
 
-const frontendDist = path.join(__dirname, "../frontend/dist")
-app.use(express.static(frontendDist))
-app.get("/{*path}", (req, res) => {
-  if (!req.path.startsWith("/api")) {
-    res.sendFile(path.join(frontendDist, "index.html"))
-  }
-})
-
 app.use((err, req, res, next) => {
   console.error(err)
   res.status(500).json({ message: "Internal server error" })
