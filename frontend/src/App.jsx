@@ -29,7 +29,7 @@ import SearchWithAi from './pages/SearchWithAi'
 import getAllReviews from './customHooks/getAllReviews'
 import { ClipLoader } from 'react-spinners'
 
-export const serverUrl = import.meta.env.VITE_SERVER_URL || ""
+export const serverUrl = import.meta.env.VITE_SERVER_URL || "https://learnmist-lms.onrender.com"
 
 function App() {
 
