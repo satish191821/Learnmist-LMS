@@ -63,15 +63,10 @@ function SearchWithAi() {
   const handleInputChange = (e) => {
     const value = e.target.value
     setInput(value)
-    if (debounceRef.current) clearTimeout(debounceRef.current)
     if (!value.trim()) {
       setRecommendations([])
       setSearched(false)
-      return
     }
-    debounceRef.current = setTimeout(() => {
-      if (!loadingRef.current) handleRecommendation(value)
-    }, 500)
   }
 
   const handleKeyDown = (e) => {
