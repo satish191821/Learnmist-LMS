@@ -26,7 +26,8 @@ function VerifyEmail() {
     setLoading(true)
     try {
       const result = await axios.post(serverUrl + '/api/auth/verifyemail', { email, otp }, { withCredentials: true })
-      dispatch(setUserData(result.data))
+      dispatch(setUserData(result.data.user))
+      if (result.data.token) localStorage.setItem("token", result.data.token)
       toast.success('Email verified successfully')
       navigate('/')
     } catch (error) {

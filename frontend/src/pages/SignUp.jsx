@@ -41,7 +41,8 @@ function SignUp() {
         { name: user.displayName, email: user.email, role },
         { withCredentials: true }
       )
-      dispatch(setUserData(result.data))
+      dispatch(setUserData(result.data.user))
+      if (result.data.token) localStorage.setItem("token", result.data.token)
       navigate("/")
       toast.success("Signup successful")
     } catch (error) {

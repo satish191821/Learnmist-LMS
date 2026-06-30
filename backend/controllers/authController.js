@@ -67,11 +67,11 @@ export const verifyEmail = async (req, res) => {
     let token = await genToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: req.secure,
+      sameSite: req.secure ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    return res.status(200).json(user);
+    return res.status(200).json({ user, token });
   } catch (error) {
     console.log("verifyEmail error");
     return res.status(500).json({ message: "Email verification failed" });
@@ -124,11 +124,11 @@ export const login = async (req, res) => {
     let token = await genToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: req.secure,
+      sameSite: req.secure ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    return res.status(200).json(user);
+    return res.status(200).json({ user, token });
   } catch (error) {
     console.log("login error");
     return res.status(500).json({ message: "Login failed" });
@@ -139,8 +139,8 @@ export const logOut = async (req, res) => {
   try {
     await res.clearCookie("token", {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production",
-  sameSite: "none"
+  secure: req.secure,
+  sameSite: req.secure ? "none" : "lax"
 });
     return res.status(200).json({ message: "logOut Successfully" });
   } catch (error) {
@@ -175,11 +175,11 @@ export const googleSignup = async (req, res) => {
     let token = await genToken(user._id);
     res.cookie("token", token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "none",
+      secure: req.secure,
+      sameSite: req.secure ? "none" : "lax",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
-    return res.status(200).json(user);
+    return res.status(200).json({ user, token });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Google signup failed" });

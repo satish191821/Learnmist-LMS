@@ -22,7 +22,8 @@ function Login() {
     setLoading(true)
     try {
       const result = await axios.post(serverUrl + "/api/auth/login", { email, password }, { withCredentials: true })
-      dispatch(setUserData(result.data))
+      dispatch(setUserData(result.data.user))
+      if (result.data.token) localStorage.setItem("token", result.data.token)
       navigate("/")
       toast.success("Login successful")
     } catch (error) {
@@ -45,7 +46,8 @@ function Login() {
         { name: user.displayName, email: user.email, role: "student" },
         { withCredentials: true }
       )
-      dispatch(setUserData(result.data))
+      dispatch(setUserData(result.data.user))
+      if (result.data.token) localStorage.setItem("token", result.data.token)
       navigate("/")
       toast.success("Login successful")
     } catch (error) {

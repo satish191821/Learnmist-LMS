@@ -37,6 +37,7 @@ function Nav() {
     if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) return
     try {
       await axios.delete(serverUrl + "/api/user/deleteaccount", { withCredentials: true })
+      localStorage.removeItem("token")
       dispatch(setUserData(null))
       toast.success("Account deleted successfully")
       navigate("/signup")
@@ -48,6 +49,7 @@ function Nav() {
   const handleLogout = async () => {
     try {
       await axios.get(serverUrl + "/api/auth/logout", { withCredentials: true })
+      localStorage.removeItem("token")
       dispatch(setUserData(null))
       toast.success("Logged out successfully")
     } catch (error) {
